@@ -41,7 +41,7 @@ function Map() {
         const polygonCenter = getPolygonCenter(parsedCoordinates);
         setMapCenter(polygonCenter);
         // Optionally adjust zoom level
-        setMapZoom(14); // Example zoom level for polygons
+        setMapZoom(15); // Example zoom level for polygons
       } else {
         console.error("Parsed coordinates are not an array:", parsedCoordinates);
       }

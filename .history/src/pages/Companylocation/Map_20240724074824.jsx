@@ -30,7 +30,7 @@ function Map() {
   const [polygons, setPolygons] = useState([]);
   const [checkMarker, setCheckMarker] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultCenter);
-  const [mapZoom, setMapZoom] = useState(0);
+  const [mapZoom, setMapZoom] = useState(4);
 
   useEffect(() => {
     if (state.user.company.coordinates) {
@@ -41,7 +41,7 @@ function Map() {
         const polygonCenter = getPolygonCenter(parsedCoordinates);
         setMapCenter(polygonCenter);
         // Optionally adjust zoom level
-        setMapZoom(14); // Example zoom level for polygons
+        setMapZoom(4); // Example zoom level for polygons
       } else {
         console.error("Parsed coordinates are not an array:", parsedCoordinates);
       }
@@ -83,6 +83,8 @@ function Map() {
   useEffect(() => {
     getLocation();
   }, []);
+
+ 
 
   const truncateToFourDecimals = (value) => {
     let valueStr = value.toString();
@@ -213,7 +215,6 @@ function Map() {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={mapCenter} // Dynamically set center
-        zoom={mapZoom} // Dynamically set zoom
         onLoad={onMapLoad}
       >
         {userLocation  && (
@@ -239,9 +240,9 @@ function Map() {
               setActivePolygonIndex(index); // Set the active polygon index
               setSelectedPolygon(polygon);
             }}
-            onMouseUp={() => {
-              savePolygon(polygon);
-            }}
+            // onMouseUp={() => {
+            //   savePolygon(polygon);
+            // }}
           />
         ))}
 

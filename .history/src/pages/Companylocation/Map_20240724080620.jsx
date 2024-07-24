@@ -30,7 +30,7 @@ function Map() {
   const [polygons, setPolygons] = useState([]);
   const [checkMarker, setCheckMarker] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultCenter);
-  const [mapZoom, setMapZoom] = useState(0);
+  const [mapZoom, setMapZoom] = useState(7);
 
   useEffect(() => {
     if (state.user.company.coordinates) {
@@ -41,7 +41,7 @@ function Map() {
         const polygonCenter = getPolygonCenter(parsedCoordinates);
         setMapCenter(polygonCenter);
         // Optionally adjust zoom level
-        setMapZoom(14); // Example zoom level for polygons
+        setMapZoom(4); // Example zoom level for polygons
       } else {
         console.error("Parsed coordinates are not an array:", parsedCoordinates);
       }
