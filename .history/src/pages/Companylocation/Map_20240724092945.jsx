@@ -47,7 +47,7 @@ function Map() {
       }
     } else {
       setMapCenter(userLocation || defaultCenter);
-      setMapZoom(4); // Default zoom level
+      setMapZoom(15); // Default zoom level
     }
   }, [state.user.company.coordinates, userLocation]);
 
