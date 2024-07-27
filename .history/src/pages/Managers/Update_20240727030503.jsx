@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import axios from "axios";
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { API_URL } from "components/Constant";
 import toast from 'react-hot-toast';
 import { AppContext } from "components/AppContext";
@@ -157,7 +157,7 @@ const Add = () => {
                                                     </>
                                                     :
                                                     <>
-                                                        <b>When working hour is assigned then account activation option will be shown! <Link to={`/manager/working-hours/${id}`} >Assign Working Hours</Link></b>
+                                                        <b>When working hour is assigned then account activation option will be shown! <Link to={`/employee/working-hours/${id}`} >Assign Working Hours</Link></b>
                                                     </>
                                                 }
                                             </Row>

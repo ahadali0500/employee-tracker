@@ -28,14 +28,13 @@ import Companylocation from "pages/Companylocation/Index";
 import ManagersIndex from "pages/Managers/Index";
 import ManagerUpdate from "pages/Managers/Update";
 import ManagerAttendance from "pages/Managers/Attendance";
-import ManagersWorkingHours from "pages/Managers/WorkingHours";
 
 
 
 import EmployeeIndex from "pages/Employee/Index";
 import EmployeeUpdate from "pages/Employee/Update";
 import EmployeeAttendance from "pages/Employee/Attendance";
-import EmployeeWorkingHours from "pages/Employee/WorkingHours";
+import EmployeeAttendance from "pages/Employee/Attendance";
 
 
 
@@ -54,14 +53,11 @@ const authProtectedRoutes = [
   { path: "/managers", component: <ManagersIndex /> },
   { path: "/managers/update/:id", component: <ManagerUpdate /> },
   { path: "/manager/attendance/:id", component: <ManagerAttendance /> },
-  { path: "/manager/working-hours/:id", component: <ManagersWorkingHours /> },
 
-  
 
   { path: "/employee", component: <EmployeeIndex /> },
   { path: "/employee/update/:id", component: <EmployeeUpdate /> },
   { path: "/employee/attendance/:id", component: <EmployeeAttendance /> },
-  { path: "/employee/working-hours/:id", component: <EmployeeWorkingHours /> },
 
 ];
 

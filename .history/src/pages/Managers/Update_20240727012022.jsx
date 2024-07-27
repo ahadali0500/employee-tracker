@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import axios from "axios";
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { API_URL } from "components/Constant";
 import toast from 'react-hot-toast';
 import { AppContext } from "components/AppContext";
@@ -20,7 +20,6 @@ const Add = () => {
     const [loading, setLoading] = useState(true);
     const [updatingLoading, setUpdatingLoading] = useState(false);
     const [departments, setDepartments] = useState([]);
-    const [data, setdata] = useState([]);
     const { state } = useContext(AppContext);
 
     const dataFetch = async () => {
@@ -33,9 +32,8 @@ const Add = () => {
             });
             console.log('Fetched data:', response.data);
             setDepartments(response.data.department);
-            setdata(response.data.data[0])
             const managerData = response.data.data[0];
-            formik.setFieldValue("departments", managerData.department_id == 0 ? '' : managerData.department_id);
+            formik.setFieldValue("departments",  managerData.department_id== null ? '' : managerData.startTime);
             formik.setFieldValue("status", managerData.status);
             formik.setFieldValue("id", managerData.id);
             setLoading(false);
@@ -99,7 +97,7 @@ const Add = () => {
                             </div>
                         </center>
                     ) : (
-                        <Form onSubmit={(e) => {
+                        <Form onSubmit={(e) => { 
                             e.preventDefault();
                             console.log("Form Submitted");
                             formik.handleSubmit(e);
@@ -131,35 +129,26 @@ const Add = () => {
                                                         ) : null}
                                                     </div>
                                                 </Col>
-
-                                                {data.working_hours != null ?
-                                                    <>
-                                                        <Col md={6}>
-                                                            <div className="mb-3">
-                                                                <Label htmlFor="status">Status</Label>
-                                                                <Input
-                                                                    type="select"
-                                                                    name="status"
-                                                                    value={formik.values.status}
-                                                                    onChange={formik.handleChange}
-                                                                    onBlur={formik.handleBlur}
-                                                                    invalid={formik.touched.status && !!formik.errors.status}
-                                                                >
-                                                                    <option value="" disabled>Choose...</option>
-                                                                    <option value="1">Active</option>
-                                                                    <option value="0">Disabled</option>
-                                                                </Input>
-                                                                {formik.touched.status && formik.errors.status ? (
-                                                                    <FormFeedback>{formik.errors.status}</FormFeedback>
-                                                                ) : null}
-                                                            </div>
-                                                        </Col>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <b>When working hour is assigned then account activation option will be shown! <Link to={`/manager/working-hours/${id}`} >Assign Working Hours</Link></b>
-                                                    </>
-                                                }
+                                                <Col md={6}>
+                                                    <div className="mb-3">
+                                                        <Label htmlFor="status">Status</Label>
+                                                        <Input
+                                                            type="select"
+                                                            name="status"
+                                                            value={formik.values.status}
+                                                            onChange={formik.handleChange}
+                                                            onBlur={formik.handleBlur}
+                                                            invalid={formik.touched.status && !!formik.errors.status}
+                                                        >
+                                                            <option value="" disabled>Choose...</option>
+                                                            <option value="1">Active</option>
+                                                            <option value="0">Disabled</option>
+                                                        </Input>
+                                                        {formik.touched.status && formik.errors.status ? (
+                                                            <FormFeedback>{formik.errors.status}</FormFeedback>
+                                                        ) : null}
+                                                    </div>
+                                                </Col>
                                             </Row>
                                         </CardBody>
                                     </Card>
@@ -172,6 +161,11 @@ const Add = () => {
                     )}
                 </Container>
             </div>
+            {!loading && (
+                <>
+                    <WorkingHours></WorkingHours>
+                </>
+            )}
         </React.Fragment>
     );
 };

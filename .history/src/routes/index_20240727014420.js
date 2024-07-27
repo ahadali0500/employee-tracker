@@ -28,7 +28,6 @@ import Companylocation from "pages/Companylocation/Index";
 import ManagersIndex from "pages/Managers/Index";
 import ManagerUpdate from "pages/Managers/Update";
 import ManagerAttendance from "pages/Managers/Attendance";
-import ManagersWorkingHours from "pages/Managers/WorkingHours";
 
 
 

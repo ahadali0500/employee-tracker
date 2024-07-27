@@ -210,11 +210,11 @@ const Index = () => {
                             </li>
                             <li>
                                 <Link
-                                    to={`/manager/working-hours/${cellProps.row.original.id}`}
+                                    to={`/employee/working-hours/${cellProps.row.original.id}`}
                                     className="btn btn-sm btn-soft-info"
                                     id={`Wourkinghourstooltip-${cellProps.row.original.id}`}
                                 >
-                                    <i style={{ fontSize: 'medium' }} className="bx bx-time-five" />
+                                    <i style={{ fontSize: 'medium' }} className="bx bx-repeat" />
                                     <UncontrolledTooltip placement="top" target={`Wourkinghourstooltip-${cellProps.row.original.id}`} >
                                         View Wourking hours
                                     </UncontrolledTooltip>

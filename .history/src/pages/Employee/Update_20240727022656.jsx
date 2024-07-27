@@ -20,22 +20,25 @@ const Add = () => {
     const [loading, setLoading] = useState(true);
     const [updatingLoading, setUpdatingLoading] = useState(false);
     const [departments, setDepartments] = useState([]);
+    const [manager, setManager] = useState([]);
     const [data, setdata] = useState([]);
     const { state } = useContext(AppContext);
 
     const dataFetch = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${API_URL}/company/manager/get/${id}`, {
+            const response = await axios.get(`${API_URL}/company/employee/get/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${state.user.token}`,
                 }
             });
             console.log('Fetched data:', response.data);
             setDepartments(response.data.department);
+            setManager(response.data.manager);
             setdata(response.data.data[0])
             const managerData = response.data.data[0];
             formik.setFieldValue("departments", managerData.department_id == 0 ? '' : managerData.department_id);
+            formik.setFieldValue("departments", managerData.manager_id == 0 ? '' : managerData.manager_id);
             formik.setFieldValue("status", managerData.status);
             formik.setFieldValue("id", managerData.id);
             setLoading(false);
@@ -57,6 +60,7 @@ const Add = () => {
     const formik = useFormik({
         initialValues: {
             departments: "",
+            manager: "",
             status: "",
             id: "",
         },
@@ -67,8 +71,9 @@ const Add = () => {
                 setUpdatingLoading(true);
                 const data = new FormData();
                 data.append('departments', values.departments);
+                data.append('manager', values.manager);
                 data.append('status', values.status);
-                const response = await axios.post(`${API_URL}/company/manager/update/${values.id}`, data, {
+                const response = await axios.post(`${API_URL}/company/employee/update/${values.id}`, data, {
                     headers: {
                         'Authorization': `Bearer ${state.user.token}`,
                     }
@@ -91,7 +96,7 @@ const Add = () => {
         <React.Fragment>
             <div className="page-content">
                 <Container fluid={true}>
-                    <Breadcrumbs title="Update Manager" breadcrumbItem="Update Manager" />
+                    <Breadcrumbs title="Update Employee" breadcrumbItem="Update Employee" />
                     {loading ? (
                         <center>
                             <div className="spinner-border mt-6" role="status">
@@ -108,7 +113,7 @@ const Add = () => {
                                 <Col xl={12}>
                                     <Card>
                                         <CardBody>
-                                            <CardTitle className="mb-4">Manager</CardTitle>
+                                            <CardTitle className="mb-4">Employee</CardTitle>
                                             <Row>
                                                 <Col md={6}>
                                                     <div className="mb-3">
@@ -131,7 +136,27 @@ const Add = () => {
                                                         ) : null}
                                                     </div>
                                                 </Col>
-
+                                                <Col md={6}>
+                                                    <div className="mb-3">
+                                                        <Label htmlFor="manager">Manager</Label>
+                                                        <Input
+                                                            type="select"
+                                                            name="manager"
+                                                            value={formik.values.manager}
+                                                            onChange={formik.handleChange}
+                                                            onBlur={formik.handleBlur}
+                                                            invalid={formik.touched.manager && !!formik.errors.manager}
+                                                        >
+                                                            <option value="" disabled>Choose...</option>
+                                                            {manager.map((item, index) => (
+                                                                <option key={index} value={item.id}>{item.name}</option>
+                                                            ))}
+                                                        </Input>
+                                                        {formik.touched.manager && formik.errors.manager ? (
+                                                            <FormFeedback>{formik.errors.manager}</FormFeedback>
+                                                        ) : null}
+                                                    </div>
+                                                </Col>
                                                 {data.working_hours != null ?
                                                     <>
                                                         <Col md={6}>
@@ -157,9 +182,10 @@ const Add = () => {
                                                     </>
                                                     :
                                                     <>
-                                                        <b>When working hour is assigned then account activation option will be shown! <Link to={`/manager/working-hours/${id}`} >Assign Working Hours</Link></b>
+                                                    <b>when working hour is assigned then account activation option will be shown! <Link href={`/employee/working-hours${id}`} >Assign Working Hours</Link></b>  
                                                     </>
                                                 }
+
                                             </Row>
                                         </CardBody>
                                     </Card>

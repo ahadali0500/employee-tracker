@@ -25,7 +25,7 @@ const WorkingHours = () => {
     const dataFetch = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${API_URL}/company/employee/working-hours/get/${id}`, {
+            const response = await axios.get(`${API_URL}/company/manager/working-hours/get/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${state.user.token}`,
                 }
@@ -109,6 +109,7 @@ const WorkingHours = () => {
     });
 
 
+
     const formik = useFormik({
         initialValues: {
             type: "",
@@ -151,7 +152,7 @@ const WorkingHours = () => {
                
                 
 
-                const response = await axios.post(`${API_URL}/company/employee/working-hours/update/${id}`, data, {
+                const response = await axios.post(`${API_URL}/company/manager/working-hours/update/${id}`, data, {
                     headers: {
                         'Authorization': `Bearer ${state.user.token}`,
                     }
@@ -170,7 +171,7 @@ const WorkingHours = () => {
     });
     return (
         <React.Fragment>
-            <div  className="page-content">
+            <div style={{padding:'calc(0px + -8px) calc(24px * 0.75) 60px calc(24px * 0.75)'}} className="page-content">
                 <Container fluid={true}>
                     <Breadcrumbs title="Update Working Routine" breadcrumbItem="Update Working Routine" />
                     {loading ? (

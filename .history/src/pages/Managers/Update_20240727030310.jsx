@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import axios from "axios";
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { API_URL } from "components/Constant";
 import toast from 'react-hot-toast';
 import { AppContext } from "components/AppContext";
@@ -20,7 +20,6 @@ const Add = () => {
     const [loading, setLoading] = useState(true);
     const [updatingLoading, setUpdatingLoading] = useState(false);
     const [departments, setDepartments] = useState([]);
-    const [data, setdata] = useState([]);
     const { state } = useContext(AppContext);
 
     const dataFetch = async () => {
@@ -33,7 +32,6 @@ const Add = () => {
             });
             console.log('Fetched data:', response.data);
             setDepartments(response.data.department);
-            setdata(response.data.data[0])
             const managerData = response.data.data[0];
             formik.setFieldValue("departments", managerData.department_id == 0 ? '' : managerData.department_id);
             formik.setFieldValue("status", managerData.status);
@@ -157,7 +155,7 @@ const Add = () => {
                                                     </>
                                                     :
                                                     <>
-                                                        <b>When working hour is assigned then account activation option will be shown! <Link to={`/manager/working-hours/${id}`} >Assign Working Hours</Link></b>
+                                                        <b>when working hour is assigned then account activation option will be shown! <Link to={`/employee/working-hours/${id}`} >Assign Working Hours</Link></b>
                                                     </>
                                                 }
                                             </Row>

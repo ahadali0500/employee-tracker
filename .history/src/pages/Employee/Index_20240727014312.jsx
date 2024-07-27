@@ -17,7 +17,7 @@ const Index = () => {
     console.log(state);
 
     const datafetch = async () => {
-        const response = await axios.get(`${API_URL}/company/manager/get` , {
+        const response = await axios.get(`${API_URL}/company/employee/get` , {
             headers: {
               'Authorization': `Bearer ${state.user.token}`,
             }
@@ -141,6 +141,27 @@ const Index = () => {
                 }
             },
             {
+                header: 'Manager Name',
+                enableColumnFilter: false,
+                enableSorting: true,
+                cell: ({ row }) => {
+                    if (Number(row.original.manager_id) == 0) {
+                        return (
+                            <div className={`badge rounded-pill badge-soft-danger font-size-11`}>
+                               Not Assigned
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <>
+                              {row.original.manager.name}
+                            </>
+                        );
+                    }
+
+                }
+            },
+            {
                 header: 'Profile Image',
                 enableColumnFilter: false,
                 enableSorting: true,
@@ -186,7 +207,7 @@ const Index = () => {
                         <ul className="list-unstyled hstack gap-1 mb-0">
                             <li>
                                 <Link
-                                    to={`/managers/update/${cellProps.row.original.id}`}
+                                    to={`/employee/update/${cellProps.row.original.id}`}
                                     className="btn btn-sm btn-soft-info"
                                     id={`edittooltip-${cellProps.row.original.id}`}
                                 >
@@ -198,7 +219,7 @@ const Index = () => {
                             </li>
                             <li>
                                 <Link
-                                    to={`/manager/attendance/${cellProps.row.original.id}`}
+                                    to={`/employee/attendance/${cellProps.row.original.id}`}
                                     className="btn btn-sm btn-soft-info"
                                     id={`attendancetooltip-${cellProps.row.original.id}`}
                                 >
@@ -210,11 +231,11 @@ const Index = () => {
                             </li>
                             <li>
                                 <Link
-                                    to={`/manager/working-hours/${cellProps.row.original.id}`}
+                                    to={`/employee/working-hours/${cellProps.row.original.id}`}
                                     className="btn btn-sm btn-soft-info"
                                     id={`Wourkinghourstooltip-${cellProps.row.original.id}`}
                                 >
-                                    <i style={{ fontSize: 'medium' }} className="bx bx-time-five" />
+                                    <i style={{ fontSize: 'medium' }} className="bx bx-repeat" />
                                     <UncontrolledTooltip placement="top" target={`Wourkinghourstooltip-${cellProps.row.original.id}`} >
                                         View Wourking hours
                                     </UncontrolledTooltip>
@@ -248,7 +269,7 @@ const Index = () => {
     return (
         <div className="page-content">
             <div className="container-fluid">
-                <Breadcrumbs title="Managers" breadcrumbItem="Managers" />
+                <Breadcrumbs title="Employee" breadcrumbItem="Employee" />
                 {loading ?
                     <>
                         <center>
@@ -283,7 +304,7 @@ const Index = () => {
                                 <center>
                                     <div style={{ marginTop: '10%' }} >
                                         <img src="/question-mark.png" style={{ width: '100px' }} ></img>
-                                        No Managers exits in our records
+                                        No Employee exits in our records
                                     </div>
                                 </center>
                             </>
@@ -297,3 +318,6 @@ const Index = () => {
 }
 
 export default Index;
+
+
+
