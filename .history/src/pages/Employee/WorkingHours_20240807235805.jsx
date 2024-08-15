@@ -338,6 +338,7 @@ const WorkingHours = () => {
                                                                     onBlur={formik.handleBlur}
                                                                     invalid={formik.touched.endpartTime && !!formik.errors.endpartTime}
                                                                 >
+
                                                                 </Input>
                                                                 {formik.touched.endpartTime && formik.errors.endpartTime ? (
                                                                     <FormFeedback>{formik.errors.endpartTime}</FormFeedback>

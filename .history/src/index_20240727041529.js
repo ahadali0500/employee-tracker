@@ -16,7 +16,7 @@ root.render(
       </BrowserRouter>
     </React.Fragment>
   </AppProvider>,
+serviceWorker.unregister();
 
 );
 
-serviceWorker.unregister();

@@ -30,10 +30,10 @@ const Sidebar = props => {
           </Link>
           <Link to="/dashboard" className="logo logo-light">
             <span className="logo-sm">
-              <img src="/connect-sim.png" width="35px" alt="" />
+              <img src="/logo/activity-tracker-2.png" width="35px" alt="" />
             </span>
             <span className="logo-lg">
-              <img src="/connect-sim.png" width="50px" alt="" /><span style={{ color: 'white', position: 'relative', top: '2px', left: '9px', fontSize: '15px' }} >Office Orbit</span>
+              <img src="/connect-white.png" width="50px" alt="" /><span style={{ color: 'white', position: 'relative', top: '2px', left: '9px', fontSize: '15px' }} >Office Orbit</span>
             </span>
           </Link>
 

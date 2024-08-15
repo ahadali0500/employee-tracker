@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import profile from "assets/images/profile-img.png";
 import logo from "assets/images/logo.svg";
-import { API_URL, API_URL2 } from "components/Constant";
+import { API_URL } from "components/Constant";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,7 @@ const Login = props => {
     const datafetch = async () => {
         const data = new FormData();
         data.append('code', code);
-        const response = await axios.post(`${API_URL2}/recoverpasswordverify.php`, data);
+        const response = await axios.post(`${API_URL}/recoverpasswordverify.php`, data);
         if (response.data.code == 200) {
             setData(0)
         } else {
@@ -43,9 +43,12 @@ const Login = props => {
             confirmpassword: '',
             password: '',
         },
-        validationSchema: Yup.object({
-            confirmpassword: Yup.string().required("Please Enter Your confirm password"),
-            password: Yup.string().required("Please Enter Your Password"),
+         validationSchema : Yup.object({
+            password: Yup.string()
+                .required("Please Enter Your Password"),
+            confirmpassword: Yup.string()
+                .oneOf([Yup.ref('password'), null], 'Passwords must match')
+                .required("Please Enter Your confirm password")
         }),
         onSubmit: async (values, { resetForm }) => {
             try {
@@ -53,7 +56,7 @@ const Login = props => {
                 const data = new FormData();
                 data.append('code', code);
                 data.append('password', values.password);
-                const response = await axios.post(`${API_URL2}/recoverpassword.php`, data);
+                const response = await axios.post(`${API_URL}/recoverpassword.php`, data);
                 if (response.data.code == 200) {
                     resetForm();
                     toast.success("Password updated successfully");
@@ -96,12 +99,12 @@ const Login = props => {
                                         <div className="">
                                             <Row>
                                                 <Col className="col-7">
-                                                    <div className="text-dark p-4">
-                                                        <h4 className="text-dark">Recover Password Expense Portal</h4>
+                                                    <div className="text-primary p-4">
+                                                        <h5 className="text-primary">Recover Password Expense App</h5>
                                                     </div>
                                                 </Col>
                                                 <Col className="col-5 align-self-end">
-                                                    <img src="/connect-sim.png" alt="" style={{width:'100px', marginBottom:'25px'}} />
+                                                    <img src="/logo.png" alt="" style={{width:'100px', marginBottom:'25px'}} />
                                                 </Col>
                                             </Row>
                                         </div>

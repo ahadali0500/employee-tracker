@@ -61,7 +61,7 @@ const Login = props => {
                                             </div>
                                         </Col>
                                         <Col className="col-5 align-self-end">
-                                            <img src="/connect-sim.png" alt="" style={{width:'100px', marginBottom:'25px'}}  />
+                                            <img src="/logo.png" alt="" style={{width:'100px', marginBottom:'25px'}}  />
                                         </Col>
                                     </Row>
                                 </div>
